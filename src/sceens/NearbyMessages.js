@@ -31,16 +31,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 export default function NearbyMessages() {
 
   const [devices, setDevices] = useState([]);
-  const deviceDataToAdd = [
-    { id: 1, deviceName: 'Samsung Galaxy Note 10' },
-    { id: 2, deviceName: 'Xiaomi 9' },
-    { id: 3, deviceName: 'Oppo Reno 5' },
-  ];
-
-  useEffect(() => {
-    // Sử dụng hàm setDevices để thêm các thiết bị vào mảng devices
-    setDevices([...devices, ...deviceDataToAdd]);
-  }, []);
   const [data, setData] = useState([]);
   const navigation = useNavigation();
 
@@ -161,9 +151,11 @@ export default function NearbyMessages() {
   };
 
   const onGetAvailableDevices = () => {
+    onStartInvestigate();
     getAvailablePeers()
       .then(peers => {
-        setDevices(peers)
+        console.log(peers)
+        // setDevices(peers)
       });
   };
 
@@ -182,15 +174,15 @@ export default function NearbyMessages() {
       <View style={{margin: 10}}>
       <Button
         color='#007AFF'
-        onPress={onStartInvestigate}
+        onPress={onGetAvailableDevices}
         title="Search Peers"
       />
       </View>
       <Text style={{alignSelf: 'center', fontSize: 17, margin: 15, fontWeight: 'bold'}}>SEARCHING NEARBY PEERS...</Text>
       {devices !== undefined && devices.map(d => {
         return (
-          <View style={{marginLeft: 15, marginRight: 15, marginBottom: 10}}>
-             <Button key={Math.random(1000).toString()} color='red' title={d.deviceName} onPress={() => connectToDevice(d)} />
+          <View style={{marginLeft: 15, marginRight: 15, marginBottom: 10}} key={Math.random(1000).toString()}>
+             <Button  color='red' title={d.deviceName} onPress={() => connectToDevice(d)} />
           </View>
         );
       })}

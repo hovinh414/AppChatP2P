@@ -9,6 +9,7 @@ import Home from './src/sceens/Home';
 import Chat from './src/sceens/Chat';
 import NearbyMessages from './src/sceens/NearbyMessages';
 // import NearbyChat from './src/screens/NearbyChat';
+import ViewData from './src/sceens/ViewData';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -30,13 +31,21 @@ function WifiP2p() {
     </Stack.Navigator>
   )
 }
-
+function ViewDataLocal() {
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="ViewData" component={ViewData}/>
+      {/* <Stack.Screen name="NearbyChat" component={NearbyChat}/> */}
+    </Stack.Navigator>
+  )
+}
 export default function App(){
   return(
     <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen  name="Home Page" component={HomeScreen}/>
         <Drawer.Screen name="Chat Wifi P2P" component={WifiP2p}/>
+        <Drawer.Screen name="ViewDataLocal" component={ViewDataLocal}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
