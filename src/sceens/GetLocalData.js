@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   Text,
   View,
@@ -7,15 +7,18 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView
 } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const BLUE = '#007AFF';
 const BLACK = '#000000';
 const LENGTH = 6;
 
-export default function ViewData() {
+export default function GetLocalData() {
   const deleteIcon = '../assets/delete.png';
   const pdf = '../assets/pdf.png';
   const txt = '../assets/txt-file.png';
@@ -38,7 +41,7 @@ export default function ViewData() {
       } else {
         setSelectedImages([...selectedImages, ...result]);
       }
-      console.log('select image: ', selectedImages);
+      // console.log('select image: ', selectedImages);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // Người dùng đã hủy việc chọn tệp
@@ -51,24 +54,26 @@ export default function ViewData() {
     const newList = selectedImages.filter(listItem => listItem !== item);
     setSelectedImages(newList);
   }
+  
+  const navigation = useNavigation()
+
+  const handleNavigate = (item) => {
+    // console.log(item)
+    navigation.navigate('ViewLocalData', item)
+  } 
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
-        <Text
-          style={{
-            alignSelf: 'center',
-            fontSize: 24,
-            margin: 8,
-            fontWeight: 'bold',
-          }}>
-          VIEW DATA LOCAL
-        </Text>
+        <View style={styles.buttonContainer}>
+          <Button color="#007AFF" onPress={pickDocument} title="Get Data" />
+        </View>
 
         <FlatList
           data={selectedImages}
-          keyExtractor={item => item.id}
-          renderItem={({item, index}) => (
-            <View
+          scrollEnabled={true}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
               style={{
                 marginBottom: 20,
                 position: 'relative',
@@ -76,7 +81,13 @@ export default function ViewData() {
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
-              }}>
+                borderColor: '#ddd',
+                borderWidth: 1,
+                paddingVertical: 5,
+                borderRadius: 8
+              }}
+              key={index}
+              onPress={() => handleNavigate(item)}>
               <View
                 style={{
                   flexDirection: 'row',
@@ -85,7 +96,7 @@ export default function ViewData() {
                 }}>
                 {item.type === 'image/jpeg' || item.type === 'image/png' ? (
                   <Image
-                    source={{uri: item.uri}}
+                    source={{ uri: item.uri }}
                     style={{
                       paddingVertical: 4,
                       marginLeft: 12,
@@ -105,8 +116,8 @@ export default function ViewData() {
                       borderRadius: 12,
                     }}
                   />
-                ) : item.type === 'text/plain'? (
-                    <Image
+                ) : item.type === 'text/plain' ? (
+                  <Image
                     source={require(txt)}
                     style={{
                       paddingVertical: 4,
@@ -116,8 +127,8 @@ export default function ViewData() {
                       borderRadius: 12,
                     }}
                   />
-                ) : item.type === 'audio/mpeg'? (
-                    <Image
+                ) : item.type === 'audio/mpeg' ? (
+                  <Image
                     source={require(mp3)}
                     style={{
                       paddingVertical: 4,
@@ -128,7 +139,7 @@ export default function ViewData() {
                     }}
                   />
                 ) : (
-                    <Image
+                  <Image
                     source={require(file)}
                     style={{
                       paddingVertical: 4,
@@ -146,6 +157,7 @@ export default function ViewData() {
                     color: '#000',
                     marginLeft: 10,
                     fontSize: 16,
+                    fontWeight: 500
                   }}>
                   {item.name}
                 </Text>
@@ -155,30 +167,27 @@ export default function ViewData() {
                 onPress={() => removeImage(item)}
                 style={{
                   position: 'absolute',
-                  top: 0,
-                  right: 0,
+                  top: 5,
+                  right: 5,
                   backgroundColor: '#C5C7C7',
                   borderRadius: 12,
                   padding: 5,
                 }}>
                 <Image
-                    source={require(deleteIcon)}
-                    style={{
-                      paddingVertical: 4,
-                      width: 20,
-                      height: 20,
-                      borderRadius: 12,
-                    }}
-                  />
+                  source={require(deleteIcon)}
+                  style={{
+                    paddingVertical: 4,
+                    width: 20,
+                    height: 20,
+                    borderRadius: 12,
+                  }}
+                />
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           )}
         />
-        <View style={styles.buttonContainer}>
-          <Button color="#007AFF" onPress={pickDocument} title="Get Data" />
-        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -186,6 +195,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8F8FF',
+    paddingBottom: 50
   },
   textInput: {
     height: 55,
@@ -198,7 +208,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     paddingLeft: 10,
     paddingRight: 10,
-    margin: 10,
   },
   buttonContainer: {
     padding: 15,
