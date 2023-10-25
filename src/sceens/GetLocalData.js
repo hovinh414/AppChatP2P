@@ -21,9 +21,13 @@ const LENGTH = 6;
 export default function GetLocalData() {
   const deleteIcon = '../assets/delete.png';
   const pdf = '../assets/pdf.png';
+  const doc = '../assets/doc.png';
+  const ppt = '../assets/ppt.png';
   const txt = '../assets/txt-file.png';
   const mp3 = '../assets/mp3.png';
-  const file = '../assets/mp3.png';
+  const file = '../assets/file.png';
+  const video = '../assets/video.png';
+  const xls = '../assets/xls-file.png';
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -127,7 +131,7 @@ export default function GetLocalData() {
                       borderRadius: 12,
                     }}
                   />
-                ) : item.type === 'audio/mpeg' ? (
+                ) : (item.type === 'audio/mpeg' || item.type === 'audio/flac' || item.type === 'audio/amr') ? (
                   <Image
                     source={require(mp3)}
                     style={{
@@ -138,7 +142,51 @@ export default function GetLocalData() {
                       borderRadius: 12,
                     }}
                   />
-                ) : (
+                ) : item.type === 'video/mp4' ? (
+                  <Image
+                    source={require(video)}
+                    style={{
+                      paddingVertical: 4,
+                      marginLeft: 12,
+                      width: 80,
+                      height: 80,
+                      borderRadius: 12,
+                    }}
+                  />
+                ) : item.type === 'application/vnd.ms-excel' ? (
+                  <Image
+                    source={require(xls)}
+                    style={{
+                      paddingVertical: 4,
+                      marginLeft: 12,
+                      width: 80,
+                      height: 80,
+                      borderRadius: 12,
+                    }}
+                  />
+                ): item.type === 'application/msword' ? (
+                  <Image
+                    source={require(doc)}
+                    style={{
+                      paddingVertical: 4,
+                      marginLeft: 12,
+                      width: 80,
+                      height: 80,
+                      borderRadius: 12,
+                    }}
+                  />
+                ): item.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation' ? (
+                  <Image
+                    source={require(ppt)}
+                    style={{
+                      paddingVertical: 4,
+                      marginLeft: 12,
+                      width: 80,
+                      height: 80,
+                      borderRadius: 12,
+                    }}
+                  />
+                ): (
                   <Image
                     source={require(file)}
                     style={{
