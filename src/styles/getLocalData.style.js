@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     color: '#000',
     marginLeft: 10,
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: "500",
   },
   btnDel: {
     position: 'absolute',

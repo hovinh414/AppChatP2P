@@ -13,17 +13,13 @@ import DocumentPicker from 'react-native-document-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/getLocalData.style';
-
+import images from '../../constants/images'
 const BLUE = '#007AFF';
 const BLACK = '#000000';
 const LENGTH = 6;
 
 export default function GetLocalData() {
-  const deleteIcon = '../../assets/images/delete.png';
-  const pdf = '../../assets/images/pdf.png';
-  const txt = '../../assets/images/txt-file.png';
-  const mp3 = '../../assets/images/mp3.png';
-  const file = '../../assets/images/mp3.png';
+
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -41,7 +37,7 @@ export default function GetLocalData() {
       } else {
         setSelectedImages([...selectedImages, ...result]);
       }
-      // console.log('select image: ', selectedImages);
+      
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // Người dùng đã hủy việc chọn tệp
@@ -50,6 +46,7 @@ export default function GetLocalData() {
       }
     }
   }
+  
   function removeImage(item) {
     const newList = selectedImages.filter(listItem => listItem !== item);
     setSelectedImages(newList);
@@ -86,22 +83,42 @@ export default function GetLocalData() {
                   />
                 ) : item.type === 'application/pdf' ? (
                   <Image
-                    source={require(pdf)}
+                    source={images.pdf}
                     style={styles.itemImg}
                   />
                 ) : item.type === 'text/plain' ? (
                   <Image
-                    source={require(txt)}
+                    source={images.txt}
                     style={styles.itemImg}
                   />
-                ) : item.type === 'audio/mpeg' ? (
+                ) : (item.type === 'audio/mpeg' || item.type === 'audio/flac' || item.type === 'audio/amr') ? (
                   <Image
-                    source={require(mp3)}
+                    source={images.mp3}
+                    style={styles.itemImg}
+                  />
+                ) : item.type === 'video/mp4' ? (
+                  <Image
+                    source={images.video}
+                    style={styles.itemImg}
+                  />
+                ) : item.type === 'application/vnd.ms-excel' ? (
+                  <Image
+                    source={images.xls}
+                    style={styles.itemImg}
+                  />
+                ): item.type === 'application/msword' ? (
+                  <Image
+                    source={images.doc}
+                    style={styles.itemImg}
+                  />
+                ) : item.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation' ? (
+                  <Image
+                    source={images.ppt}
                     style={styles.itemImg}
                   />
                 ) : (
                   <Image
-                    source={require(file)}
+                    source={images.file}
                     style={styles.itemImg}
                   />
                 )}
@@ -116,7 +133,7 @@ export default function GetLocalData() {
                 onPress={() => removeImage(item)}
                 style={styles.btnDel}>
                 <Image
-                  source={require(deleteIcon)}
+                  source={images.remove}
                   style={styles.iconImg}
                 />
               </TouchableOpacity>
