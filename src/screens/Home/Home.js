@@ -2,7 +2,7 @@ import React, {useState, useLayoutEffect} from 'react';
 import {Text, View, Button, TextInput, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import styles from '../styles/home.style';
+import styles from './home.style';
 
 const BLUE = '#007AFF';
 const BLACK = '#000000';

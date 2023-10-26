@@ -7,7 +7,7 @@ import {
 } from 'react-native-webrtc';
 import {GiftedChat} from 'react-native-gifted-chat';
 import io from 'socket.io-client';
-import styles from '../styles/chat.style';
+import styles from './chat.style';
 
 const Chat = ({route}) => {
   const peerRef = useRef();
