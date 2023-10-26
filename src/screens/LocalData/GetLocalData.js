@@ -12,8 +12,8 @@ import {
 import DocumentPicker from 'react-native-document-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../styles/getLocalData.style';
-import images from '../../constants/images'
+import styles from './getLocalData.style';
+import images from '../../../constants/images'
 const BLUE = '#007AFF';
 const BLACK = '#000000';
 const LENGTH = 6;
