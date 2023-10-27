@@ -1,18 +1,18 @@
 import { StyleSheet } from 'react-native'
-import {COLORS} from '../../../constants'
+import {COLORS, SHADOWS} from '../../../constants'
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 51,
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
         marginBottom: 10,
-        paddingRight: 12,
-        paddingLeft: 12,
+        borderBottomColor: COLORS.lightgray,
+        borderBottomWidth: 1,
+        paddingVertical: 10
     },
     avatarDetail: {
         marginLeft: 10,
