@@ -4,14 +4,23 @@ import {COLORS, SHADOWS, SIZES} from '../../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8FF',
+    backgroundColor: COLORS.white,
+  },
+  header: {
+    padding: 16,
+    backgroundColor: COLORS.white,
+  },
+  headerText: {
+    fontSize: 24,
+    color: COLORS.black,
+    fontWeight: 'bold',
   },
   textInput: {
     height: 55,
     paddingLeft: 15,
     paddingRight: 15,
     fontSize: 18,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primary,
     borderWidth: 0.5,
   },
   inputContainer: {

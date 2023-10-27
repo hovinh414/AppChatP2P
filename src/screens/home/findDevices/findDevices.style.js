@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {COLORS, SHADOWS, SIZES} from '../../../constants';
+import {COLORS, FONT, SHADOWS} from '../../../../constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: COLORS.light,
   },
   welcome: {
     fontSize: 20,
@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
   createGroupBtn: {
     borderRadius: 5,
     padding: 12,
-    backgroundColor: 'green',
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center',
   },
 
   btnLabel: {
     color: '#fff',
     fontWeight: '500',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 export default styles;

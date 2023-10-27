@@ -1,19 +1,29 @@
 const COLORS = {
-  primary: '#312651',
-  secondary: '#444262',
-  tertiary: '#FF7754',
+  dark: '#00204A',
+  primary: '#005792',
+  secondary: '#00BBF0',
+  light: '#D9FAFF',
 
-  gray: '#83829A',
-  gray2: '#C1C0C8',
+  black: '#000000',
+  lightblack: '#231F20',
 
-  white: '#F3F4F8',
-  lightWhite: '#FAFAFC',
+  darkgray: '#666',
+  gray: '#858585',
+  gray2: '#C7C7C7',
+  lightgray: '#D9D9D9',
+
+  white: '#FFFFFF',
+  lightwhite: '#F9F9F9',
+
+  yellow: '#FCB446',
+  red: '#C44444',
+  transparent: 'rgba(0,0,0,0)',
 };
 
 const FONT = {
-  regular: 'DMRegular',
-  medium: 'DMMedium',
-  bold: 'DMBold',
+  regular: 'DMSans-Regular',
+  medium: 'DMSans-Medium',
+  bold: 'DMSans-Bold',
 };
 
 const SIZES = {
@@ -26,8 +36,8 @@ const SIZES = {
 };
 
 const SHADOWS = {
-  small: {
-    shadowColor: '#000',
+  small: color => ({
+    shadowColor: color,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -35,9 +45,9 @@ const SHADOWS = {
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 2,
-  },
-  medium: {
-    shadowColor: '#000',
+  }),
+  medium: color => ({
+    shadowColor: color,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -45,7 +55,17 @@ const SHADOWS = {
     shadowOpacity: 0.25,
     shadowRadius: 5.84,
     elevation: 5,
-  },
+  }),
+  large: color => ({
+    shadowColor: color,
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
+  }),
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export {COLORS, FONT, SIZES, SHADOWS};

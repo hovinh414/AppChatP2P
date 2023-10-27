@@ -7,6 +7,19 @@ import doc from '../assets/images/doc.png';
 import video from '../assets/images/video.png';
 import xls from '../assets/images/xls-file.png';
 import ppt from '../assets/images/ppt.png';
+import deviceFinding from '../assets/images/deviceFinding.gif';
+import phone from '../assets/images/phone.png';
+
 export default {
-  file, remove, mp3, pdf, txt, doc, video, xls, ppt
+  file,
+  remove,
+  mp3,
+  pdf,
+  txt,
+  doc,
+  video,
+  xls,
+  ppt,
+  deviceFinding,
+  phone,
 };

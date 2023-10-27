@@ -1,5 +1,13 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { StyleSheet, Button, ScrollView, Text, View, ActivityIndicator, Image } from 'react-native';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
+import {
+  StyleSheet,
+  Button,
+  ScrollView,
+  Text,
+  View,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
 import {
   initialize,
   startDiscoveringPeers,
@@ -17,13 +25,13 @@ import {
   getConnectionInfo,
   getGroupInfo,
 } from 'react-native-wifi-p2p';
-import { PermissionsAndroid } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {PermissionsAndroid} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styles from './findDevices.style';
-import DeviceCard from '../../components/DeviceCard/DeviceCard';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import deviceFinding from '../../../assets/images/deviceFinding.gif'
+import DeviceCard from '../../../common/DeviceCard';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {images} from '../../../../constants';
 
 export default function FindDevices() {
   const [devices, setDevices] = useState([]);
@@ -37,23 +45,7 @@ export default function FindDevices() {
     // {
     //   deviceName: 'Samsung Galaxy A33'
     // },
-
   ]);
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerStyle: {
-        backgroundColor: '#fff',
-        height: 75,
-      },
-      headerTintColor: '#000',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerTitleAlign: 'center',
-    });
-  });
 
   useEffect(() => {
     const initWifiP2P = async () => {
@@ -73,11 +65,11 @@ export default function FindDevices() {
 
         if (
           granted[PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION] ===
-          PermissionsAndroid.RESULTS.GRANTED &&
+            PermissionsAndroid.RESULTS.GRANTED &&
           granted[PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION] ===
-          PermissionsAndroid.RESULTS.GRANTED &&
+            PermissionsAndroid.RESULTS.GRANTED &&
           granted[PermissionsAndroid.PERMISSIONS.NEARBY_WIFI_DEVICES] ===
-          PermissionsAndroid.RESULTS.GRANTED
+            PermissionsAndroid.RESULTS.GRANTED
         ) {
           console.log('You can use the p2p mode');
         } else {
@@ -114,7 +106,7 @@ export default function FindDevices() {
     // console.log('OnConnectionInfoUpdated', info);
   };
 
-  const handleNewPeers = ({ devices }) => {
+  const handleNewPeers = ({devices}) => {
     // console.log('OnPeersUpdated', devices);
     setDevices(devices);
   };
@@ -196,35 +188,44 @@ export default function FindDevices() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ScrollView style={{ paddingHorizontal: 20, paddingVertical: 10, }}>
-        <View style={{ marginBottom: 10 }}>
+    <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <ScrollView style={{paddingHorizontal: 20}}>
+        <View style={{marginBottom: 10}}>
           <TouchableOpacity style={styles.createGroupBtn}>
             <Text style={styles.btnLabel}>Create Group</Text>
           </TouchableOpacity>
         </View>
 
+        <View style={{paddingTop: 10, paddingBottom: 10, flex: 1}}>
+          {devices.length !== 0 ? (
+            <View>
+              <Text
+                style={{fontSize: 14, fontWeight: '500', marginVertical: 10}}>
+                Available Devices
+              </Text>
 
-        <View style={{ paddingTop: 10, paddingBottom: 10, flex: 1, }}>
-          {devices.length !== 0
-            ? <View>
-              <Text style={{ fontSize: 14, fontWeight: '500', marginVertical: 10 }}>Available Devices</Text>
-
-              {
-                devices.map((data, index) => {
-                  return (
-                    <DeviceCard key={index} device={data} />
-                  );
-                })
-              }
+              {devices.map((data, index) => {
+                return <DeviceCard key={index} device={data} />;
+              })}
             </View>
-            : <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '50%' }}>
+          ) : (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: '50%',
+              }}>
               {/* <ActivityIndicator size='large' color='grey'/> */}
-              <Image source={deviceFinding} style={{ height: 140, width: 140 }} />
-              <Text style={{ fontSize: 18, marginTop: 10 }}>Searching for devices...</Text>
-            </View>}
+              <Image
+                source={images.deviceFinding}
+                style={{height: 140, width: 140}}
+              />
+              <Text style={{fontSize: 18, marginTop: 10}}>
+                Searching for devices...
+              </Text>
+            </View>
+          )}
         </View>
-
       </ScrollView>
     </View>
   );
